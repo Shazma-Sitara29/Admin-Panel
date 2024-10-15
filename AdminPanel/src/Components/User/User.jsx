@@ -21,10 +21,20 @@ const UserManagement = () => {
     return re.test(String(email).toLowerCase());
   };
 
+  const validateName = (name) => {
+    // Regex to allow only letters and spaces
+    const re = /^[a-zA-Z\s]+$/;
+    return re.test(name);
+  };
+
   const addUser = () => {
     setError('');
     if (!newUser.name || !newUser.email) {
       setError('Both fields are required!');
+      return;
+    }
+    if (!validateName(newUser.name)) {
+      setError('Please enter a valid name (letters and spaces only)!');
       return;
     }
     if (!validateEmail(newUser.email)) {
@@ -49,6 +59,10 @@ const UserManagement = () => {
     if (!editingUser) return;
     if (!newUser.name || !newUser.email) {
       setError('Both fields are required!');
+      return;
+    }
+    if (!validateName(newUser.name)) {
+      setError('Please enter a valid name (letters and spaces only)!');
       return;
     }
     if (!validateEmail(newUser.email)) {
@@ -84,7 +98,7 @@ const UserManagement = () => {
           className="border p-2 mr-2"
         />
         {editingUser ? (
-          <button onClick={updateUser} className="bg-green-500  text-white p-2">
+          <button onClick={updateUser} className="bg-green-500 text-white p-2">
             Update User
           </button>
         ) : (
