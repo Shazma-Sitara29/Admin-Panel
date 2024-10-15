@@ -59,7 +59,7 @@ export const App = () => {
         <div className="p-4 pt-16">
           <Routes>
             <Route path="/user" element={<User />} />
-            <Route path="/stores/stores" element={<Stores />} />
+            <Route path="/stores" element={<Stores />} />
             <Route path="/product/products" element={<Products />} />
           </Routes>
         </div>
