@@ -22,8 +22,7 @@ const UserManagement = () => {
   };
 
   const validateName = (name) => {
-    // Regex to allow only letters and spaces
-    const re = /^[a-zA-Z\s]+$/;
+    const re = /^[a-zA-Z\s]+$/; // Regex to allow only letters and spaces
     return re.test(name);
   };
 
@@ -77,17 +76,17 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-6">
       <h2 className="text-2xl font-bold mb-4 text-center">User Management</h2> {/* Centered Heading */}
       
-      <div className="mb-4">
+      <div className="mb-4 flex flex-col sm:flex-row justify-center items-center">
         <input
           type="text"
           name="name"
           placeholder="Name"
           value={newUser.name}
           onChange={handleInputChange}
-          className="border p-2 mr-2"
+          className="border p-2 mr-2 mb-2 sm:mb-0"
         />
         <input
           type="email"
@@ -95,7 +94,7 @@ const UserManagement = () => {
           placeholder="Email"
           value={newUser.email}
           onChange={handleInputChange}
-          className="border p-2 mr-2"
+          className="border p-2 mr-2 mb-2 sm:mb-0"
         />
         {editingUser ? (
           <button onClick={updateUser} className="bg-green-500 text-white p-2">
@@ -108,11 +107,11 @@ const UserManagement = () => {
         )}
       </div>
 
-      {error && <div className="text-red-500 mb-4">{error}</div>}
+      {error && <div className="text-red-500 mb-4 text-center">{error}</div>} {/* Error Message */}
 
-      <table className="min-w-full bg-white border">
+      <table className="min-w-full bg-white border border-gray-300">
         <thead>
-          <tr>
+          <tr className="bg-gray-200">
             <th className="border px-4 py-2">ID</th>
             <th className="border px-4 py-2">Name</th>
             <th className="border px-4 py-2">Email</th>
@@ -121,7 +120,7 @@ const UserManagement = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
+            <tr key={user.id} className="hover:bg-gray-100">
               <td className="border px-4 py-2">{user.id}</td>
               <td className="border px-4 py-2">{user.name}</td>
               <td className="border px-4 py-2">{user.email}</td>
@@ -134,7 +133,7 @@ const UserManagement = () => {
                 </button>
                 <button 
                   onClick={() => deleteUser(user.id)} 
-                  className="bg-red-500 text-white p-1 ml-2" // Added margin for spacing
+                  className="bg-red-500 text-white p-1"
                 >
                   Delete
                 </button>
