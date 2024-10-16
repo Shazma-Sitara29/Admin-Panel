@@ -74,7 +74,7 @@ const Sidebar = () => {
       </div>
 
       {/* Sidebar */}
-      <div className={`w-64 h-screen bg-emerald-500 fixed top-0 left-0 z-50 shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out`}>
+      <div className={`w-64 h-screen bg-black fixed top-0 left-0 z-50 shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out`}>
         <div className="p-6">
           <h1 className="text-white text-3xl font-extrabold">Admin Panel</h1>
         </div>
@@ -83,7 +83,7 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/dashbard"
-                className="text-white text-lg font-semibold hover:bg-emerald-600 hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
+                className="text-white text-lg font-semibold hover:bg-slate-300 hover:text-black hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
               >
                 Dashboard
               </Link>
@@ -91,7 +91,7 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/user"
-                className="text-white text-lg font-semibold hover:bg-emerald-600 hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
+                className="text-white text-lg font-semibold hover:bg-slate-300 hover:text-black hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
               >
                 Users
               </Link>
@@ -99,7 +99,7 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/stores"
-                className="text-white text-lg font-semibold hover:bg-emerald-600 hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
+                className="text-white text-lg font-semibold hover:bg-slate-300  hover:text-black hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
               >
                 Stores
               </Link>
@@ -107,7 +107,7 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/products"
-                className="text-white text-lg font-semibold hover:bg-emerald-600 hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
+                className="text-white text-lg font-semibold hover:bg-slate-300 hover:text-black hover:pl-4 transition-all duration-300 block py-3 px-6 rounded-lg"
               >
                 Products
               </Link>

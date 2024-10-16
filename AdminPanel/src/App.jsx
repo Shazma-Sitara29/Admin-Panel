@@ -62,7 +62,7 @@ export const App = () => {
             <Route path="/dashboard"  element={<Dashborad/>}/>
             <Route path="/user" element={<User />} />
             <Route path="/stores" element={<Stores />} />
-            <Route path="/product/products" element={<Products />} />
+            <Route path="/products" element={<Products />} />
           </Routes>
         </div>
       </div>
@@ -71,3 +71,10 @@ export const App = () => {
 }
 
 export default App;
+     
+
+
+
+
+
+
