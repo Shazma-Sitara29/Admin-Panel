@@ -43,6 +43,7 @@ import User from './Components/User/User';
 import Stores from './Components/Stores/Stores';
 import Products from './Components/Product/Products';
 import Navbar from './Components/Dashboard/Navbar';
+import Dashborad from './Components/Dashboard/Dashborad';
 
 export const App = () => {
   return (
@@ -58,6 +59,7 @@ export const App = () => {
         {/* Routes with padding to adjust for Navbar */}
         <div className="p-4 pt-16">
           <Routes>
+            <Route path="/dashboard"  element={<Dashborad/>}/>
             <Route path="/user" element={<User />} />
             <Route path="/stores" element={<Stores />} />
             <Route path="/product/products" element={<Products />} />
