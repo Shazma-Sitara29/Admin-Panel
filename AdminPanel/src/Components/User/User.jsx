@@ -157,130 +157,60 @@
 
 
 
-
-
-
 import React, { useState } from 'react';
+import { BellIcon } from '@heroicons/react/outline';
 
-const UserManagement = () => {
-  const [users, setUsers] = useState([
+const NotificationPanel = () => {
+  const [notifications, setNotifications] = useState([
     { id: 1, name: 'Ali', email: 'ali@example.com' },
     { id: 2, name: 'Sara', email: 'sara@example.com' },
-    { id: 3, name: 'Usman', email: 'usman@example.com' },
   ]);
+  const [users, setUsers] = useState([]);
 
-  const [newUser, setNewUser] = useState({ name: '', email: '' });
-  const [editingUser, setEditingUser] = useState(null);
-  const [error, setError] = useState('');
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+  // Accept user notification and add to users table
+  const acceptUser = (notification) => {
+    setUsers([...users, notification]);
+    setNotifications(notifications.filter((n) => n.id !== notification.id));
   };
 
-  const validateEmail = (email) => {
-    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return re.test(String(email).toLowerCase());
-  };
-
-  const validateName = (name) => {
-    const re = /^[a-zA-Z\s]+$/;
-    return re.test(name);
-  };
-
-  const addUser = (e) => {
-    e.preventDefault(); // Prevent form submission
-    setError('');
-    if (!newUser.name || !newUser.email) {
-      setError('Both fields are required!');
-      return;
-    }
-    if (!validateName(newUser.name)) {
-      setError('Please enter a valid name (letters and spaces only)!');
-      return;
-    }
-    if (!validateEmail(newUser.email)) {
-      setError('Please enter a valid email address!');
-      return;
-    }
-    setUsers([...users, { id: Date.now(), ...newUser }]);
-    setNewUser({ name: '', email: '' });
-  };
-
-  const deleteUser = (id) => {
+  // Remove user from table
+  const removeUser = (id) => {
     setUsers(users.filter((user) => user.id !== id));
-  };
-
-  const startEdit = (user) => {
-    setEditingUser(user);
-    setNewUser({ name: user.name, email: user.email });
-  };
-
-  const updateUser = (e) => {
-    e.preventDefault(); // Prevent form submission
-    setError('');
-    if (!editingUser) return;
-    if (!newUser.name || !newUser.email) {
-      setError('Both fields are required!');
-      return;
-    }
-    if (!validateName(newUser.name)) {
-      setError('Please enter a valid name (letters and spaces only)!');
-      return;
-    }
-    if (!validateEmail(newUser.email)) {
-      setError('Please enter a valid email address!');
-      return;
-    }
-    setUsers(users.map((user) => 
-      user.id === editingUser.id ? { ...user, ...newUser } : user
-    ));
-    setNewUser({ name: '', email: '' });
-    setEditingUser(null);
   };
 
   return (
     <div className="p-6 max-w-7xl mx-auto bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">User Management</h2>
-
-      {/* User Form */}
-      <div className="bg-gray-100 p-6 rounded-lg mb-6">
-        <form className="space-y-4" onSubmit={editingUser ? updateUser : addUser}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter Name"
-              value={newUser.name}
-              onChange={handleInputChange}
-              className="p-3 border rounded-lg w-full"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              value={newUser.email}
-              onChange={handleInputChange}
-              className="p-3 border rounded-lg w-full"
-            />
+      {/* Navbar with notification */}
+      <div className="flex justify-end items-center space-x-4">
+        <div className="relative">
+          <BellIcon className="h-8 w-8 text-gray-600 cursor-pointer" />
+          {notifications.length > 0 && (
+            <span className="absolute top-0 right-0 rounded-full bg-red-500 text-white text-xs px-2 py-1">
+              {notifications.length}
+            </span>
+          )}
+          <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg">
+            {notifications.map((notification) => (
+              <div
+                key={notification.id}
+                className="p-4 hover:bg-gray-100 flex justify-between items-center"
+              >
+                <span>{notification.name}</span>
+                <button
+                  onClick={() => acceptUser(notification)}
+                  className="bg-blue-500 text-white px-2 py-1 rounded-lg"
+                >
+                  Accept
+                </button>
+              </div>
+            ))}
           </div>
-          <div className="flex justify-center">
-            {editingUser ? (
-              <button type="submit" className="bg-green-500 text-white p-3 rounded-lg w-full sm:w-auto">
-                Update User
-              </button>
-            ) : (
-              <button type="submit" className="bg-blue-500 text-white p-3 rounded-lg w-full sm:w-auto">
-                Add User
-              </button>
-            )}
-          </div>
-        </form>
-
-        {error && <div className="text-red-500 text-center mt-4">{error}</div>}
+        </div>
+        
       </div>
 
-      {/* User Table */}
+      {/* Users Table */}
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Users</h2>
       <div className="bg-gray-50 p-6 rounded-lg shadow-md">
         <table className="w-full bg-white border border-gray-300 rounded-lg">
           <thead>
@@ -298,20 +228,12 @@ const UserManagement = () => {
                 <td className="border px-4 py-2">{user.name}</td>
                 <td className="border px-4 py-2">{user.email}</td>
                 <td className="border px-4 py-2">
-                  <div className="flex space-x-2">
-                    <button 
-                      onClick={() => startEdit(user)} 
-                      className="bg-yellow-500 text-white p-2 rounded-lg"
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      onClick={() => deleteUser(user.id)} 
-                      className="bg-red-500 text-white p-2 rounded-lg"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => removeUser(user.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded-lg"
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
@@ -322,4 +244,7 @@ const UserManagement = () => {
   );
 };
 
-export default UserManagement;
+export default NotificationPanel;
+
+
+
