@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+
+
+
+
+
+
+/* Add this CSS to your global CSS file or within the component */
+.chart-container {
+    position: relative;
+    width: 100%;
+    min-height: 250px; /* Set a minimum height for the charts */
+    max-height: 400px; /* Set a maximum height for the charts */
+    overflow: hidden;
+  }
+  
+  
