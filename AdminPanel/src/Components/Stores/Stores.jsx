@@ -462,7 +462,10 @@ const StoresManagement = () => {
               <option value="">Select Store Type</option>
               <option value="Grocery">Grocery</option>
               <option value="Electronics">Electronics</option>
-              <option value="Clothing">Clothing</option>
+              <option value="Detergents">Detergents</option>
+              <option value="Cosmetics">Cosmetics</option>
+              <option value="Frozen Food">Frozen Food</option>
+              <option value="Bakery">Bakery</option>
             </select>
           </div>
           <div className="flex justify-center">
